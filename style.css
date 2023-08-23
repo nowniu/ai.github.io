@@ -1,19 +1,47 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto; 
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+#loadingIcon {
+  width: 20px;
+  height: 20px;
+}
+
+#translateBtn {
+  height: 40px;
+  font-size: 16px;
+}
 
 #outputs {
-  display: flex;
+  display: flex; 
 }
 
 .output {
-  flex: 1;
-  margin: 10px;
+  flex: 1; 
+  padding: 20px;
 }
 
+/* 响应式布局 */
 @media (max-width: 600px) {
+
   #outputs {
-    flex-direction: column; 
+    flex-direction: column;
   }
-  
+
   .output {
-    margin: 10px 0;
+    padding: 10px;
   }
+
 }

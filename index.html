@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="style.css">
 
+  <title>多语言翻译</title> 
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>多语言翻译</h1>
+
+    <div>
+      <textarea id="input" rows="5" cols="40" placeholder="输入文本"></textarea>
+      <button id="translateBtn">翻译</button>
+    </div>
+
+    <h2>翻译结果</h2>
+    
+    <div id="outputs">
+      <div class="output">
+        <h3>英文</h3>
+        <div id="en" class="translate-text"></div>
+      </div>
+
+      <div class="output">
+        <h3>中文</h3>  
+        <div id="zh" class="translate-text"></div>
+      </div>
+
+      <div class="output">
+        <h3>日文</h3>
+        <div id="ja" class="translate-text"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

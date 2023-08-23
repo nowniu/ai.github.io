@@ -1,30 +1,36 @@
+// API密钥
+const GOOGLE_API_KEY = '1'; 
+const DEEPL_API_KEY = '1';
+const AZURE_API_KEY = '1';
 
-document.getElementById('translateBtn').addEventListener('click', () => {
-
-  const inputText = document.getElementById('input').value;
-
-  // 调用不同翻译API
-  translateToEn(inputText); 
-  translateToZh(inputText);
-  translateToJa(inputText);
-
-});
+// ...省略按钮点击处理函数...
 
 // Google 翻译到英文
 function translateToEn(text) {
-  fetch(`https://translation.googleapis.com/language/translate/v2?q=${text}&target=en`)
+  fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}&q=${text}&target=en`)
     .then(res => res.json())
     .then(data => {
       document.getElementById('en').innerText = data.data.translations[0].translatedText;
-    });  
+    });
 }
 
-// 其他翻译API调用...
-
+// DeepL 翻译到中文
 function translateToZh(text) {
-  // 调用中文翻译API
-}
+  fetch(`https://api.deepl.com/v2/translate?key=${DEEPL_API_KEY}&text=${text}&target_lang=ZH`)  
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('zh').innerText = data.translations[0].text;
+    });
+} 
 
+// Azure 翻译到日文  
 function translateToJa(text) {
-  // 调用日文翻译API 
+  fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=ja&key=${AZURE_API_KEY}`, {
+    method: 'POST',
+    body: [{Text: text}]
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('ja').innerText = data[0].translations[0].text;
+  });
 }

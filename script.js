@@ -1,36 +1,43 @@
-// API密钥
-const GOOGLE_API_KEY = '1'; 
-const DEEPL_API_KEY = '1';
-const AZURE_API_KEY = '1';
+// JS代码 
 
-// ...省略按钮点击处理函数...
+// API密钥 
+const GOOGLE_KEY = 'xxx';
+const DEEPL_KEY = 'xxx'; 
+const AZURE_KEY = 'xxx';
 
-// Google 翻译到英文
-function translateToEn(text) {
-  fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}&q=${text}&target=en`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('en').innerText = data.data.translations[0].translatedText;
-    });
+// DOM元素
+const loadingIcon = document.getElementById('loadingIcon');  
+const inputText = document.getElementById('input');
+// ......
+
+// 翻译函数
+async function translate(text) {
+  // 调用不同平台API 
+  // 返回结果数组
 }
 
-// DeepL 翻译到中文
-function translateToZh(text) {
-  fetch(`https://api.deepl.com/v2/translate?key=${DEEPL_API_KEY}&text=${text}&target_lang=ZH`)  
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('zh').innerText = data.translations[0].text;
-    });
+// 平台翻译函数
+async function googleTranslate(text) {
+  // 调用谷歌API
 } 
 
-// Azure 翻译到日文  
-function translateToJa(text) {
-  fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=ja&key=${AZURE_API_KEY}`, {
-    method: 'POST',
-    body: [{Text: text}]
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('ja').innerText = data[0].translations[0].text;
-  });
+async function deeplTranslate(text) {
+  // 调用DeepL API
+}
+
+async function azureTranslate(text) {
+  // 调用Azure API 
+}
+
+// 点击处理
+translateBtn.addEventListener('click', async () => {
+  // 显示loading
+  // 调用翻译并渲染结果
+  // 隐藏loading
+});
+
+// 出错处理
+function handleError(err) {
+  // 隐藏loading  
+  // 提示错误
 }

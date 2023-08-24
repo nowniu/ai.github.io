@@ -2,7 +2,7 @@
 
 // 翻译服务配置
 const googleTranslateConfig = {
-  apiKey: "AIzaSyCBlgr3g2wlYaxPC1iq_NirrGBDaVLNTxg",
+  apiKey: "",
   sourceLanguage: "en",
   targetLanguage: "zh-CN",
 };

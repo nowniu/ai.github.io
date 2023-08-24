@@ -1,7 +1,7 @@
 // JS代码 
 
 // API密钥 
-const GOOGLE_KEY = 'xxx';
+const GOOGLE_KEY = 'AIzaSyCBlgr3g2wlYaxPC1iq_NirrGBDaVLNTxg';
 const DEEPL_KEY = 'xxx'; 
 const AZURE_KEY = 'xxx';
 

@@ -10,34 +10,59 @@ const loadingIcon = document.getElementById('loadingIcon');
 const inputText = document.getElementById('input');
 // ......
 
+
 // 翻译函数
 async function translate(text) {
-  // 调用不同平台API 
-  // 返回结果数组
+
+  const [googleRes, deeplRes, azureRes] = await Promise.all([
+    googleTranslate(text), 
+    deeplTranslate(text),
+    azureTranslate(text)
+  ]);
+
+  return [googleRes, deeplRes, azureRes];
+
 }
 
-// 平台翻译函数
+// 调用谷歌翻译API
 async function googleTranslate(text) {
-  // 调用谷歌API
+  const res = await fetch(`https://translation.googleapis.com/language/translate/v2?q=${text}&target=en&key=${GOOGLE_KEY}`);
+  return await res.json();
+}
+
+// 调用DeepL API
+async function deeplTranslate(text) {
+  const res = await fetch(`https://api.deepl.com/v2/translate?auth_key=${DEEPL_KEY}&text=${text}&target_lang=EN`);
+  return await res.json();
 } 
 
-async function deeplTranslate(text) {
-  // 调用DeepL API
+// 调用Azure API
+async function azureTranslate(text) {
+  const res = await fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=fr&key=${AZURE_KEY}`, {
+    method: 'POST',
+    body: [{ Text: text }]
+  });
+  return await res.json();
 }
 
-async function azureTranslate(text) {
-  // 调用Azure API 
-}
 
 // 点击处理
 translateBtn.addEventListener('click', async () => {
-  // 显示loading
-  // 调用翻译并渲染结果
-  // 隐藏loading
+  
+  showLoading();
+  
+  const inputText = input.value;
+  const result = await translate(inputText);
+  
+  renderResult(result);
+  
+  hideLoading();
+
 });
 
-// 出错处理
-function handleError(err) {
-  // 隐藏loading  
-  // 提示错误
+// 渲染结果 
+function renderResult(result) {
+  googleOut.innerText = result[0].data.translations[0].translatedText;
+  deeplOut.innerText = result[1].translations[0].text; 
+  azureOut.innerText = result[2][0].translations[0].text;
 }

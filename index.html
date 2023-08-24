@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>多平台翻译</title>
-  <link rel="stylesheet" href="styles.css"> 
+<title>多语种翻译工具</title>
 </head>
-
 <body>
 
-  <div class="container">
-    
-    <h1>多平台翻译对比</h1>
+<h1>多语种翻译工具</h1>
 
-    <div class="input-area">
-      <textarea id="input" rows="5" placeholder="输入文本"></textarea>
-      <button id="translateBtn">
-        <img id="loadingIcon" src="loading.svg">
-        点击翻译  
-      </button>
-    </div>
+<input type="text" id="sourceText" placeholder="请输入原文">
 
-    <h2>翻译结果</h2>
-   
-    <div id="outputs">
-      
-      <!-- 翻译结果 -->
-      
-    </div>
+<div id="googleTranslation"></div>
+<div id="deeplTranslation"></div>
+<div id="microsoftTranslation"></div>
 
-  </div>
-  
-  <script src="script.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>

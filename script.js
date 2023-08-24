@@ -1,68 +1,71 @@
-// JS代码 
 
-// API密钥 
-const GOOGLE_KEY = 'AIzaSyCBlgr3g2wlYaxPC1iq_NirrGBDaVLNTxg';
-const DEEPL_KEY = 'xxx'; 
-const AZURE_KEY = 'xxx';
 
-// DOM元素
-const loadingIcon = document.getElementById('loadingIcon');  
-const inputText = document.getElementById('input');
-// ......
+// 翻译服务配置
+const googleTranslateConfig = {
+  apiKey: "AIzaSyCBlgr3g2wlYaxPC1iq_NirrGBDaVLNTxg",
+  sourceLanguage: "zh-CN",
+  targetLanguage: "en",
+};
 
+const deeplTranslateConfig = {
+  apiKey: "YOUR_DEEPL_TRANSLATE_API_KEY",
+  sourceLanguage: "zh-CN",
+  targetLanguage: "en",
+};
+
+const microsoftTranslateConfig = {
+  apiKey: "YOUR_MICROSOFT_TRANSLATE_API_KEY",
+  sourceLanguage: "zh-CN",
+  targetLanguage: "en",
+};
 
 // 翻译函数
-async function translate(text) {
+function translate(text, translateConfig) {
+  // 构造请求参数
+  let params = {
+    text: text,
+  };
 
-  const [googleRes, deeplRes, azureRes] = await Promise.all([
-    googleTranslate(text), 
-    deeplTranslate(text),
-    azureTranslate(text)
-  ]);
+  // 发送请求
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", translateConfig.apiUrl, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify(params));
 
-  return [googleRes, deeplRes, azureRes];
-
+  // 处理响应
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      // 解析响应
+      let response = JSON.parse(xhr.responseText);
+      return response.translations[0].translatedText;
+    } else {
+      // 出错处理
+      return "";
+    }
+  };
 }
 
-// 调用谷歌翻译API
-async function googleTranslate(text) {
-  const res = await fetch(`https://translation.googleapis.com/language/translate/v2?q=${text}&target=en&key=${GOOGLE_KEY}`);
-  return await res.json();
+// 主函数
+function main() {
+  // 绑定事件
+  document.getElementById("sourceText").addEventListener("keyup", translateText);
 }
 
-// 调用DeepL API
-async function deeplTranslate(text) {
-  const res = await fetch(`https://api.deepl.com/v2/translate?auth_key=${DEEPL_KEY}&text=${text}&target_lang=EN`);
-  return await res.json();
-} 
+// 翻译文本
+function translateText() {
+  // 获取文本输入框中的文本
+  let sourceText = document.getElementById("sourceText").value;
 
-// 调用Azure API
-async function azureTranslate(text) {
-  const res = await fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=fr&key=${AZURE_KEY}`, {
-    method: 'POST',
-    body: [{ Text: text }]
-  });
-  return await res.json();
+  // 调用翻译服务
+  let googleTranslation = translate(sourceText, googleTranslateConfig);
+  let deeplTranslation = translate(sourceText, deeplTranslateConfig);
+  let microsoftTranslation = translate(sourceText, microsoftTranslateConfig);
+
+  // 显示翻译结果
+  document.getElementById("googleTranslation").innerHTML = googleTranslation;
+  document.getElementById("deeplTranslation").innerHTML = deeplTranslation;
+  document.getElementById("microsoftTranslation").innerHTML = microsoftTranslation;
 }
 
-
-// 点击处理
-translateBtn.addEventListener('click', async () => {
-  
-  showLoading();
-  
-  const inputText = input.value;
-  const result = await translate(inputText);
-  
-  renderResult(result);
-  
-  hideLoading();
-
-});
-
-// 渲染结果 
-function renderResult(result) {
-  googleOut.innerText = result[0].data.translations[0].translatedText;
-  deeplOut.innerText = result[1].translations[0].text; 
-  azureOut.innerText = result[2][0].translations[0].text;
-}
+// 启动程序
+main();

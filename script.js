@@ -3,20 +3,20 @@
 // 翻译服务配置
 const googleTranslateConfig = {
   apiKey: "AIzaSyCBlgr3g2wlYaxPC1iq_NirrGBDaVLNTxg",
-  sourceLanguage: "zh-CN",
-  targetLanguage: "en",
+  sourceLanguage: "en",
+  targetLanguage: "zh-CN",
 };
 
 const deeplTranslateConfig = {
   apiKey: "YOUR_DEEPL_TRANSLATE_API_KEY",
-  sourceLanguage: "zh-CN",
-  targetLanguage: "en",
+  sourceLanguage: "en",
+  targetLanguage: "zh-CN",
 };
 
 const microsoftTranslateConfig = {
   apiKey: "YOUR_MICROSOFT_TRANSLATE_API_KEY",
-  sourceLanguage: "zh-CN",
-  targetLanguage: "en",
+  sourceLanguage: "en",
+  targetLanguage: "zh-CN",
 };
 
 // 翻译函数
@@ -69,3 +69,4 @@ function translateText() {
 
 // 启动程序
 main();
+

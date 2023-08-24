@@ -69,4 +69,3 @@ function translateText() {
 
 // 启动程序
 main();
-
